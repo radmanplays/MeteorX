@@ -4,9 +4,9 @@ var isKeyPressed = 0;
 function X(){
   var div = document.getElementById("GUI");
       if (div) {
-        if (isKeyPressed == 0) {
+        if (isKeyPressed == 1) {
           div.remove();
-          isKeyPressed = false;
+          isKeyPressed = 0;
         }  
       } else {
         console.log("Element not found.");
@@ -19,7 +19,10 @@ PluginAPI.addEventListener("key", function(event) {
   // Check if the pressed key is "right shift"
   if (event.key === 54) { // Key code for "right shift"
     if (isKeyPressed == 1) {
-      isKeyPressed += 1;
+      X()
+    }
+    if (isKeyPressed == 0) {
+      var isKeyPressed == 1
       var div = document.createElement('div');
       div.id = 'GUI';
       div.innerHTML = `
@@ -60,8 +63,3 @@ PluginAPI.addEventListener("key", function(event) {
   } 
     }
 });
-
-
-if (isKeyPressed > 1) {
-  isKeyPressed = 0;
-}
