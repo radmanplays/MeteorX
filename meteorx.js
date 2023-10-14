@@ -1,65 +1,65 @@
-// Add a boolean variable to track if the "right shift" key has been pressed
-var isKeyPressed = 0;
+var guiVisible = false; // Variable to keep track of the visibility of the GUI
 
-function X(){
-  var div = document.getElementById("GUI");
-      if (div) {
-        if (isKeyPressed == 1) {
-          div.remove();
-          isKeyPressed = 0;
-        }  
-      } else {
-        console.log("Element not found.");
-      }
+function toggleGui() { // Function to toggle the GUI visibility
+    if (guiVisible) { // If the GUI is visible
+        hideGui(); // Hide the GUI
+    } else {
+        showGui(); // Otherwise, show the GUI
+    }
 }
 
-// Add event listener for key press
-PluginAPI.addEventListener("key", function(event) {
+function showGui() { // Function to show the GUI
+    hideGui(); // If the GUI is already open, this will hide it.
+    var gui = document.createElement("gui"); // Create a new "gui" element
+    gui.innerHTML =`
+    <gui id="myGui" style="width: 100%;height: 100%;position: fixed;top: 0px;left: 0px;z-index: 10;color: white;font-family: Minecraftia, sans-serif;overflow: hidden scroll;background-color: rgba(80, 80, 80, 0.42);background-blend-mode: multiply;background-size: 64px;">
+    <h1 style="text-shadow: 0px 0px 4px;">MeteorX GUI</h1>
+    <p style="font-size: 0.8rem; color: yellow;">(totally not stollen from plugin manager's gui)</p><p style="font-size: 0.8rem; color: yellow;">ik the gui looks kinda bad for a hacked client but its meteorX alpha ig. i WILL update this gui in the future</p><p style="font-size: 0.8rem; color: orangered;">click on "Activate" to activate a hack and click on "Deactivate" to deactivate a hack</p>
+    <table style="table-layout: fixed; width: 100%;">
+        <tbody><tr style="background: rgb(80, 80, 80);">
+            <th style="text-align: center;">hax</th>
+            <th style="text-align: center; width: 15%;">active/deactive</th>
+        </tr>
+        <tr style="box-shadow: grey 0px 2px 0px;">
+            <td style="user-select: text;background-color: #9d00ff30;">Jetpack (hold space to fly) 🎒💨</td>
+            <td style="background-color: gray; text-align: center;">Activate</td>
+        </tr>
+    </tbody></table>
+    <a style="background: transparent; text-align: center; color: yellow; cursor: pointer; font-family: Minecraftia, sans-serif; text-decoration: underline; border: 0px; margin-right: 1rem; font-size: 1rem;" href="https://github.com/radmanplays/MeteorX/issues/new" target="_blank">suggest a new feature/hack</a>
+    <a style="background: transparent;text-align: center;color: orange;cursor: pointer;font-family: Minecraftia, sans-serif;text-decoration: underline;border: 0px;font-size: 1rem;" href="https://github.com/orgs/EaglerReborn/discussions/9" target="_blank">version Roadmap</a>
+    
+</gui>
+    `; // Set the HTML content of the "gui" element
+    gui.id = "myGui"; // Set the ID of the "gui" element to "myGui"
+    gui.style.width = '100%';
+    gui.style.height = '100%';
+    gui.style.position = 'fixed';
+    gui.style.top = '0px';
+    gui.style.left = '0px';
+    gui.style.zIndex = '10';
+    gui.style.color = 'white';
+    gui.style.fontFamily = 'Minecraftia, sans-serif';
+    gui.style.overflow = 'hidden scroll';
+    gui.style.backgroundColor = 'rgba(80, 80, 80, 0.42)';
+    gui.style.backgroundBlendMode = 'multiply';
+    gui.style.backgroundSize = '64px';
+    document.body.appendChild(gui); // Append the "gui" element to the body of the document
+    guiVisible = true; // Set the GUI visibility to true
+}
 
-  // Check if the pressed key is "right shift"
-  if (event.key === 54) { // Key code for "right shift"
-    if (isKeyPressed == 1) {
-      X()
+function hideGui() { // Function to hide the GUI
+    if (document.getElementById("myGui")) { // If the "myGui" element exists
+        document.getElementById("myGui").remove(); // Remove the "myGui" element from the document
     }
-    if (isKeyPressed == 0) {
-      var isKeyPressed == 1
-      var div = document.createElement('div');
-      div.id = 'GUI';
-      div.innerHTML = `
-          <h1 style="text-shadow: 0px 0px 4px;">Really Cool GUI<a href="javascript:void(0)" onclick="X()" style="margin-left: 2rem; color: red;">[X]</a></h1>
-          <p style="font-size: 0.8rem; color: orangered;">some text</p>
-          <table style="table-layout: fixed; width: 100%;">
-              <tr style="background: rgb(80, 80, 80);">
-                  <th style="text-align: center;">some text</th>
-                  <th style="text-align: center; width: 15%;">more text</th>
-              </tr>
-              <tr style="box-shadow: grey 0px 2px 0px;">
-                  <td style="user-select: text;">
-                  </td>
-                  <td style="background-color: green; text-align: center;">TEXT<button style="background: transparent; text-align: center; color: yellow; cursor: pointer; font-family: Minecraftia, sans-serif; text-decoration: underline; border: 0px; margin-left: 1rem; font-size: 1rem;">[X]</button></td>
-              </tr>
-          </table>
-          <button style="background: transparent; text-align: center; color: yellow; cursor: pointer; font-family: Minecraftia, sans-serif; text-decoration: underline; border: 0px; margin-right: 1rem; font-size: 1rem;">cool button</button>
-          <button style="background: transparent; text-align: center; color: yellow; cursor: pointer; font-family: Minecraftia, sans-serif; text-decoration: underline; border: 0px; font-size: 1rem;">really cool button</button>
-          <a href="javascript:void(0)" style="color: yellow; display: block; margin-top: 2rem; width: 0px; white-space: nowrap;">coolest button</a>
-        `;
+    guiVisible = false; // Set the GUI visibility to false
+}
 
-      // Set the styles for the div
-      div.style.width = '100%';
-      div.style.height = '100%';
-      div.style.position = 'fixed';
-      div.style.top = '0px';
-      div.style.left = '0px';
-      div.style.zIndex = '10';
-      div.style.color = 'white';
-      div.style.fontFamily = 'Minecraftia, sans-serif';
-      div.style.overflow = 'hidden scroll';
-      div.style.backgroundColor = 'rgba(80, 80, 80, 0.42)';
-      div.style.backgroundBlendMode = 'multiply';
-      div.style.backgroundSize = '64px';
-
-      // Append the div to the end of the body tag
-      document.body.appendChild(div);
-  } 
+window.addEventListener("keydown", (event) => { // Event listener for keydown events
+    if (event.key === "Shift" && event.location === KeyboardEvent.DOM_KEY_LOCATION_RIGHT) { // If the right Shift key is pressed
+        toggleGui(); // Toggle the GUI visibility
+    }
+    
+    if (event.key === "Escape") { // If the Escape key is pressed
+        hideGui(); // Hide the GUI
     }
 });
